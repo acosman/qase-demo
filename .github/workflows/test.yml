@@ -1,10 +1,6 @@
 name: Run Qase Tests
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push]
 
 jobs:
   test:
@@ -12,23 +8,19 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: 3.9
 
       - name: Install dependencies
         run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt || true  # In case requirements.txt is missing
-          pip install requests python-dotenv
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run Qase test script
+        run: python qase_tester.py
         env:
           QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
-        run: |
-          source venv/bin/activate
-          python qase_tester.py
