@@ -72,4 +72,4 @@ def create_test_case(project_code, title="My New Test Case from VS Code"):
 if __name__ == "__main__":
     print("Qase test automation script starting...")  # 👈 added line
     get_projects()
-    create_test_case("QTD", "Test Case from VS Code")
+    create_test_case("QTD", "Test Case from Github CI/CD")
